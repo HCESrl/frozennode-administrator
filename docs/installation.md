@@ -14,51 +14,25 @@
 To install Administrator as a Composer package to be used with Laravel 5, simply add this to your composer.json:
 
 ```json
-"frozennode/administrator": "5.*"
+"frozennode/administrator": "10.*"
 ```
 
 ..and run `composer update`.  Once it's installed, you can register the service provider in `config/app.php` in the `providers` array:
 
 ```php
 'providers' => [
-    'Frozennode\Administrator\AdministratorServiceProvider',
+    Frozennode\Administrator\AdministratorServiceProvider::class,
 ]
 ```
 
 Then publish Administrator's assets with `php artisan vendor:publish`. This will add the file `config/administrator.php`. This [config file](http://administrator.frozennode.com/docs/configuration) is the primary way you interact with Administrator. This command will also publish all of the assets, views, and translation files.
-
-
-<a name="laravel-4"></a>
-## Laravel 4
-
-If you want to use Administrator with Laravel 4, you need to resolve to Administrator 4:
-
-```json
-"frozennode/administrator": "4.*"
-```
-
-Then publish the config file with `php artisan config:publish frozennode/administrator`. This will add the file `app/config/packages/frozennode/administrator/administrator.php`.
-
-Then finally you need to publish the package's assets with the `php artisan asset:publish frozennode/administrator` command.
-
-<a name="laravel-3"></a>
-## Laravel 3
-
-Since Administrator has switched over to Composer, you can no longer use `php artisan bundle:install administrator` or `php artisan bundle:upgrade administrator`. If you want to use Administrator with Laravel 3, you must switch to the [3.3.2 branch](https://github.com/FrozenNode/Laravel-Administrator/tree/3.3.2), download it, and add it in the `/bundles/administrator` directory and add this to your bundles.php file:
-
-```php
-'administrator' => array(
-    'handles' => 'admin', //this determines what URI this bundle will use
-    'auto' => true,
-),
-```
 
 <a name="assets"></a>
 ## Assets
 
 After the package is installed, you need to publish the package's assets like this:
 
-	php artisan asset:publish frozennode/administrator
+	php artisan vendor:publish --provider="Frozennode\Administrator\AdministratorServiceProvider"
 
 It is best to publish the assets whenever Administrator updates. Instead of doing this manually, you can add the above command to your `scripts` object in your composer.json file:
 
@@ -81,7 +55,7 @@ It is best to publish the assets whenever Administrator updates. Instead of doin
 
 You can publish the config file with:
 
-	php artisan config:publish frozennode/administrator
+	php artisan vendor:publish --provider="Frozennode\Administrator\AdministratorServiceProvider"
 
 This will create the file `app/config/packages/frozennode/administrator/administrator.php` and seed it with some defaults. This [config file](http://administrator.frozennode.com/docs/configuration) is the primary way you interact with Administrator.
 
